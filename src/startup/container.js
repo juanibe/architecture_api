@@ -18,6 +18,9 @@ const { HomeController } = require('../controllers')
 const { HomeRoutes } = require('../routes/index.routes')
 const Routes = require('../routes')
 
+// Models
+const { User, Comment, Idea } = require('../models')
+
 
 /*
     Este objeto tiene médotos. Uno de ellos es register para crear una nueva clase de inyección, un nuevo
@@ -59,6 +62,11 @@ container
             de las diferentes funciones que los requirean
         */
         HomeRoutes: asFunction(HomeRoutes).singleton()
+    })
+    .register({
+        User: asValue(User),
+        Comment: asValue(Comment),
+        Idea: asValue(Idea)
     })
 
 module.exports = container
