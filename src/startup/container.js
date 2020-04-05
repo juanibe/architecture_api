@@ -21,6 +21,9 @@ const Routes = require('../routes')
 // Models
 const { User, Comment, Idea } = require('../models')
 
+// Repositories
+const { UserRepository, IdeaRepository, CommentRepository } = require('../repositories')
+
 
 /*
     Este objeto tiene médotos. Uno de ellos es register para crear una nueva clase de inyección, un nuevo
@@ -67,6 +70,11 @@ container
         User: asValue(User),
         Comment: asValue(Comment),
         Idea: asValue(Idea)
+    })
+    .register({
+        UserRepository: asClass(UserRepository).singleton(),
+        CommentRepository: asClass(CommentRepository).singleton(),
+        IdeaRepository: asClass(IdeaRepository).singleton()
     })
 
 module.exports = container
