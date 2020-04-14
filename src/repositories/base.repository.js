@@ -1,4 +1,13 @@
+/*
+    Este repositorio va a servir de plantilla para un CRUD cuya responsabilidad va 
+    a ser heredada por otros repositorios.
+*/
+
 class BaseRepository {
+
+    /*
+        Este constructor va a recibir el modelo o la entidad de mongo db con la que va a interactuar.
+    */
     constructor(model) {
         this.model = model
     }
@@ -20,7 +29,8 @@ class BaseRepository {
     }
 
     async delete(id) {
-        return await this.model.findByIdAndDelete(id)
+        await this.model.findByIdAndDelete(id)
+        return true
     }
 }
 

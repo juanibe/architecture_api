@@ -33,9 +33,9 @@ class IdeaService extends BaseService {
             throw error
         }
 
-        idea.downVotes.push(true)
+        idea.downvotes.push(true)
 
-        return await _ideaRepository.update(ideaId, { downVotes: idea.downVotes })
+        return await _ideaRepository.update(ideaId, { downvotes: idea.downvotes })
     }
 
     async downvoteIdea(ideaId) {
@@ -54,9 +54,9 @@ class IdeaService extends BaseService {
             throw error
         }
 
-        idea.upVotes.push(true)
+        idea.upvotes.push(true)
 
-        return await _ideaRepository.update(ideaId, { upVotes: idea.upVotes })
+        return await _ideaRepository.update(ideaId, { upvotes: idea.upvotes })
     }
 }
 

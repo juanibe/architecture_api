@@ -2,6 +2,13 @@
     Aquí vamos a configuarar nuestro contenedor de inyección de dependencias
 */
 
+
+/**
+ * Metodos: 
+ * asValue ==> método que nos va a ayudar a inyectar un objecto como un valor
+ * asClass ==> método que nos va a ayudar a inyectar un objecto como una clase
+ * asFunction ==> método que nos va a ayudar a inyectar un objecto como una función
+ */
 const { createContainer, asClass, asValue, asFunction } = require('awilix')
 
 // Config
@@ -12,7 +19,7 @@ const app = require('.')
 const { HomeService, UserService, IdeaService, CommentService } = require('../services')
 
 // Controllers
-const { HomeController } = require('../controllers')
+const { HomeController, UserController, IdeaController, CommentController } = require('../controllers')
 
 // Routes
 const { HomeRoutes } = require('../routes/index.routes')
@@ -34,7 +41,7 @@ const container = createContainer()
 /*
     Le paso un objecto a register como parametro, el key (HomeService) es como vamos a identificar a la inyección.
     Y luego lo que va a inyectar. En este caso va a ser una clase. La clase va a ser HomeService (importado mas arriba)
-    y esa clase va a ser un singleton 
+    y esa clase va a ser un singleton -> de forma que sea siempre la misma instancia de esta clase compartida entre las diferentes partes en que estemos usandola
 */
 container
     // Configuración principal de la aplicación
@@ -59,7 +66,10 @@ container
         /* Llamamos al metodo bind, porque express a la hora de llamar un controlador, el scope cambia. Con esto 
         el scope se mantiene
         */
-        HomeController: asClass(HomeController.bind(HomeController))
+        HomeController: asClass(HomeController.bind(HomeController)).singleton(),
+        UserController: asClass(UserController.bind(UserController)).singleton(),
+        IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
+        CommentController: asClass(CommentController.bind(CommentController)).singleton(),
     })
     //Configuración de las rutas
     .register({
