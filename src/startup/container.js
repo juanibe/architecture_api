@@ -22,7 +22,7 @@ const { HomeService, UserService, IdeaService, CommentService } = require('../se
 const { HomeController, UserController, IdeaController, CommentController } = require('../controllers')
 
 // Routes
-const { HomeRoutes } = require('../routes/index.routes')
+const { HomeRoutes, UserRoutes, CommentRoutes, IdeaRoutes } = require('../routes/index.routes')
 const Routes = require('../routes')
 
 // Models
@@ -77,7 +77,11 @@ container
             Con esto ya tenemos nuestras rutas configuradas y listas para ser inyectadas en los constructures
             de las diferentes funciones que los requirean
         */
-        HomeRoutes: asFunction(HomeRoutes).singleton()
+        HomeRoutes: asFunction(HomeRoutes).singleton(),
+        UserRoutes: asFunction(UserRoutes).singleton(),
+        CommentRoutes: asFunction(CommentRoutes).singleton(),
+        IdeaRoutes: asFunction(IdeaRoutes).singleton()
+
     })
     .register({
         User: asValue(User),
