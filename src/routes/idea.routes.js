@@ -1,4 +1,5 @@
 const { Router } = require('express')
+const { ParseIntMiddleware } = require('../middlewares')
 
 /*
     Esto vendría siendo como un constructor de una clase, porque al fin y al cabo las clases 
@@ -14,7 +15,7 @@ module.exports = function ({ IdeaController }) {
         Cuando express hace esto, el scope es el de express, pero como en el container ya le pusimos un bind entonces
         el scope se va a mantener y vamos a poder acceder a nuestro servicio.
     */
-    router.get("/", IdeaController.getAll)
+    router.get("/", ParseIntMiddleware, IdeaController.getAll)
     router.get("/:ideaId", IdeaController.get)
     router.get("/:userId/all", IdeaController.getUserIdeas)
     router.post("/", IdeaController.create)
