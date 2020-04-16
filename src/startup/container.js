@@ -16,13 +16,13 @@ const config = require('../config')
 const app = require('.')
 
 // Services
-const { HomeService, UserService, IdeaService, CommentService } = require('../services')
+const { HomeService, UserService, IdeaService, CommentService, AuthService } = require('../services')
 
 // Controllers
-const { HomeController, UserController, IdeaController, CommentController } = require('../controllers')
+const { HomeController, UserController, IdeaController, CommentController, AuthController } = require('../controllers')
 
 // Routes
-const { HomeRoutes, UserRoutes, CommentRoutes, IdeaRoutes } = require('../routes/index.routes')
+const { HomeRoutes, UserRoutes, CommentRoutes, IdeaRoutes, AuthRoutes } = require('../routes/index.routes')
 const Routes = require('../routes')
 
 // Models
@@ -59,7 +59,9 @@ container
         HomeService: asClass(HomeService).singleton(),
         UserService: asClass(UserService).singleton(),
         IdeaService: asClass(IdeaService).singleton(),
-        CommentService: asClass(CommentService).singleton()
+        CommentService: asClass(CommentService).singleton(),
+        AuthService: asClass(AuthService).singleton()
+
     })
     // Configuración de los controladores
     .register({
@@ -70,6 +72,8 @@ container
         UserController: asClass(UserController.bind(UserController)).singleton(),
         IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
         CommentController: asClass(CommentController.bind(CommentController)).singleton(),
+        AuthController: asClass(AuthController.bind(AuthController)).singleton(),
+
     })
     //Configuración de las rutas
     .register({
@@ -80,7 +84,9 @@ container
         HomeRoutes: asFunction(HomeRoutes).singleton(),
         UserRoutes: asFunction(UserRoutes).singleton(),
         CommentRoutes: asFunction(CommentRoutes).singleton(),
-        IdeaRoutes: asFunction(IdeaRoutes).singleton()
+        IdeaRoutes: asFunction(IdeaRoutes).singleton(),
+        AuthRoutes: asFunction(AuthRoutes).singleton()
+
 
     })
     .register({

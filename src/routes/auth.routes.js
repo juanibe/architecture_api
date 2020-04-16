@@ -1,5 +1,4 @@
 const { Router } = require('express')
-const { AuthMiddleware } = require('../middlewares')
 
 /*
     Esto vendría siendo como un constructor de una clase, porque al fin y al cabo las clases 
@@ -7,7 +6,7 @@ const { AuthMiddleware } = require('../middlewares')
     Por lo tanto como funciona como el constructor de una clase, vamos a requerir el HomeController. Esto
     awilix ya lo tiene configurado, entonces cuando lo vea se lo va a proveer
 */
-module.exports = function ({ UserController }) {
+module.exports = function ({ AuthController }) {
     const router = Router()
 
     /* 
@@ -15,11 +14,8 @@ module.exports = function ({ UserController }) {
         Cuando express hace esto, el scope es el de express, pero como en el container ya le pusimos un bind entonces
         el scope se va a mantener y vamos a poder acceder a nuestro servicio.
     */
-    router.get("/:userId", [AuthMiddleware], UserController.get)
-    router.get("/", UserController.getAll)
-    router.patch("/:userId", UserController.update)
-    router.delete("/:userId", UserController.delete)
-
+    router.post("/signUp", AuthController.signUp)
+    router.post("/signIn", AuthController.signIn)
     return router
 }
 
